@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoFlow Store — Templates IA & Automatisation · Bretagne</title>
+  <meta name="description" content="Workflows Make, guides PDF, templates slides pour automatiser votre activité en France. Par BZHandiBreizh, Morbihan."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cyan: #00D4FF; --cyan-dim: rgba(0,212,255,0.1); --violet: #7C3AED;
+      --green: #10B981; --orange: #FF6B35;
+      --bg: #090B0F; --surface: rgba(255,255,255,0.025); --border: rgba(255,255,255,0.07);
+      --text: #E8EDF5; --muted: #8B95A5; --faint: #4B5563;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 3px; } ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; transition: all .3s; }
+    nav.scrolled { background: rgba(9,11,15,.93); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg,var(--cyan),#0099CC); display: grid; place-items: center; font-size: 17px; }
+    .logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--text); }
+    .logo-text span { color: var(--cyan); }
+    .nav-cta { background: linear-gradient(135deg,var(--cyan),#0099CC); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; padding: 9px 22px; border-radius: 9px; border: none; cursor: pointer; font-size: 13px; text-decoration: none; transition: all .2s; }
+    .nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 25px rgba(0,212,255,.35); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 20%, rgba(0,212,255,.07) 0%, transparent 70%); pointer-events: none; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,212,255,.08); border: 1px solid rgba(0,212,255,.2); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 600; color: var(--cyan); margin-bottom: 36px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.8); } }
+    h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(42px,7vw,82px); line-height: 1.04; letter-spacing: -2px; margin-bottom: 28px; }
+    .gradient-text { background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 18px; color: var(--muted); max-width: 520px; margin: 0 auto 52px; line-height: 1.7; font-weight: 300; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-main { background: linear-gradient(135deg,var(--cyan),#0099CC); color: #000; font-family: 'Syne', sans-serif; font-weight: 700; padding: 16px 36px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px; text-decoration: none; transition: all .2s; display: inline-block; }
+    .btn-main:hover { transform: scale(1.03); box-shadow: 0 0 35px rgba(0,212,255,.4); }
+    .btn-outline { background: rgba(255,255,255,.04); border: 1px solid var(--border); color: var(--text); padding: 16px 28px; border-radius: 12px; cursor: pointer; font-size: 15px; text-decoration: none; transition: all .2s; display: inline-block; }
+    .btn-outline:hover { border-color: rgba(255,255,255,.2); }
+
+    /* STATS */
+    .stats { display: flex; justify-content: center; margin-top: 72px; border-top: 1px solid var(--border); padding-top: 52px; flex-wrap: wrap; gap: 0; }
+    .stat { text-align: center; padding: 0 44px; border-right: 1px solid rgba(255,255,255,.06); }
+    .stat:last-child { border-right: none; }
+    .stat-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 34px; color: var(--cyan); }
+    .stat-lbl { font-size: 12px; color: var(--faint); margin-top: 4px; letter-spacing: .5px; }
+
+    /* SECTION */
+    section { max-width: 1200px; margin: 0 auto; padding: 80px 32px; }
+    .section-tag { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+    .section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,44px); letter-spacing: -1px; margin-bottom: 16px; }
+    .section-sub { color: var(--muted); font-size: 16px; font-weight: 300; max-width: 500px; }
+
+    /* FILTERS */
+    .filters { display: flex; gap: 8px; margin: 40px 0; flex-wrap: wrap; }
+    .filter-btn { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1px; cursor: pointer; transition: all .2s; }
+    .filter-btn.active { background: var(--cyan); border-color: var(--cyan); color: #000; }
+    .filter-btn:hover:not(.active) { border-color: rgba(255,255,255,.15); color: var(--text); }
+
+    /* PRODUCT GRID */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+    .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+    .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+    .card-badge { display: inline-flex; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 9px; letter-spacing: 2px; padding: 3px 10px; border-radius: 100px; text-transform: uppercase; }
+    .card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+    .card-type { font-size: 10px; color: var(--faint); font-weight: 600; letter-spacing: 1px; }
+    .card-emoji { font-size: 38px; margin-bottom: 14px; display: block; }
+    .card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 19px; margin-bottom: 5px; line-height: 1.2; }
+    .card-sub { font-size: 12px; font-weight: 500; margin-bottom: 12px; }
+    .card-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .card-features { list-style: none; margin-bottom: 20px; }
+    .card-features li { font-size: 12px; color: #9CA3AF; padding: 3px 0; display: flex; gap: 8px; align-items: flex-start; }
+    .card-dl { font-size: 11px; color: var(--faint); margin-bottom: 14px; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .card-price { font-family: 'Syne', sans-serif; }
+    .card-price-main { font-weight: 800; font-size: 26px; }
+    .card-price-old { font-size: 13px; color: var(--faint); text-decoration: line-through; margin-left: 6px; }
+    .btn-buy { font-family: 'Syne', sans-serif; font-weight: 700; padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all .2s; text-decoration: none; display: inline-block; }
+    .btn-buy:hover { transform: scale(1.04); }
+
+    /* SUBSCRIPTION */
+    .sub-section { background: linear-gradient(135deg, rgba(124,58,237,.08) 0%, rgba(0,212,255,.08) 100%); border: 1px solid rgba(124,58,237,.15); border-radius: 32px; padding: 64px 40px; text-align: center; margin: 0 32px 80px; }
+    .sub-tag { display: inline-block; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: 3px; padding: 4px 14px; border-radius: 100px; background: rgba(124,58,237,.2); color: #A78BFA; border: 1px solid rgba(124,58,237,.3); margin-bottom: 24px; }
+    .sub-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,42px); letter-spacing: -1px; margin-bottom: 16px; }
+    .sub-sub { color: var(--muted); font-size: 16px; font-weight: 300; max-width: 480px; margin: 0 auto 40px; }
+    .billing-toggle { display: inline-flex; background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 36px; }
+    .billing-btn { padding: 10px 26px; border-radius: 9px; border: none; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer; transition: all .2s; position: relative; }
+    .billing-btn.active { background: var(--violet); color: #fff; }
+    .billing-btn:not(.active) { background: transparent; color: var(--muted); }
+    .savings-chip { position: absolute; top: -8px; right: -8px; background: var(--green); color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 100px; font-weight: 700; }
+    .sub-price { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 58px; letter-spacing: -2px; }
+    .sub-price-period { font-size: 17px; color: var(--muted); }
+    .sub-annual-note { color: var(--green); font-size: 13px; margin: 8px 0 36px; }
+    .sub-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: left; max-width: 600px; margin: 0 auto 40px; }
+    .sub-feat { display: flex; gap: 8px; font-size: 13px; color: #9CA3AF; align-items: center; }
+    .sub-feat span { color: #A78BFA; }
+    .btn-sub { background: linear-gradient(135deg, var(--violet), #5B21B6); color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; padding: 18px 52px; border-radius: 14px; border: none; cursor: pointer; font-size: 16px; transition: all .2s; }
+    .btn-sub:hover { transform: scale(1.03); box-shadow: 0 0 35px rgba(124,58,237,.4); }
+    .sub-legal { font-size: 11px; color: var(--faint); margin-top: 16px; }
+
+    /* HOW IT WORKS */
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 60px; }
+    .how-step { text-align: center; }
+    .how-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: 3px; color: var(--cyan); margin-bottom: 14px; }
+    .how-icon { font-size: 38px; margin-bottom: 18px; }
+    .how-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 10px; }
+    .how-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* TOAST */
+    #toast { position: fixed; top: 20px; right: 20px; z-index: 9999; background: var(--green); color: #fff; padding: 12px 22px; border-radius: 12px; font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(16,185,129,.3); display: none; animation: slidein .35s ease; }
+    @keyframes slidein { from { transform: translateX(80px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; }
+    .footer-brand span { color: var(--cyan); }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-links { display: flex; gap: 20px; font-size: 12px; color: var(--faint); }
+    .footer-links a { color: var(--faint); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .stat { padding: 0 20px; }
+      section { padding: 60px 20px; }
+      .how-grid, .sub-features { grid-template-columns: 1fr; }
+      .sub-section { margin: 0 16px 60px; padding: 40px 20px; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-icon">⚡</div>
+    <span class="logo-text">AutoFlow<span>Store</span></span>
+  </a>
+  <a href="#produits" class="nav-cta">Voir les templates →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><div class="dot"></div> 47 templates disponibles · Mis à jour chaque semaine</div>
+  <h1>Automatisez.<br><span class="gradient-text">Vendez. Récoltez.</span></h1>
+  <p class="hero-sub">Workflows Make, guides PDF, templates slides — des produits digitaux prêts à l'emploi pour les professionnels de l'IA en France.</p>
+  <div class="hero-actions">
+    <a href="#produits" class="btn-main">Explorer les templates →</a>
+    <a href="#abonnement" class="btn-outline">💎 Accès illimité</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">1 200+</div><div class="stat-lbl">Clients actifs</div></div>
+    <div class="stat"><div class="stat-val">47</div><div class="stat-lbl">Templates dispo</div></div>
+    <div class="stat"><div class="stat-val">4.9/5</div><div class="stat-lbl">Note moyenne</div></div>
+    <div class="stat"><div class="stat-val">98%</div><div class="stat-lbl">Satisfaction</div></div>
+  </div>
+</div>
+
+<!-- PRODUITS -->
+<section id="produits">
+  <div class="section-tag">Catalogue</div>
+  <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+    <div>
+      <h2 class="section-title">Nos produits digitaux</h2>
+      <p class="section-sub">Téléchargement immédiat après achat. Accès à vie.</p>
+    </div>
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-filter="tous">TOUS</button>
+    <button class="filter-btn" data-filter="pdf">PDF</button>
+    <button class="filter-btn" data-filter="workflow">WORKFLOW</button>
+    <button class="filter-btn" data-filter="slides">SLIDES</button>
+    <button class="filter-btn" data-filter="bundle">BUNDLE</button>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<!-- ABONNEMENT -->
+<div class="sub-section" id="abonnement">
+  <div class="sub-tag">ACCÈS ILLIMITÉ</div>
+  <h2 class="sub-title">Abonnement <span style="color:#A78BFA">Premium</span></h2>
+  <p class="sub-sub">Tous les templates actuels et futurs, communauté privée, webinaires live mensuels.</p>
+  <div class="billing-toggle">
+    <button class="billing-btn active" id="btn-mensuel" onclick="setBilling('mensuel')">Mensuel</button>
+    <button class="billing-btn" id="btn-annuel" onclick="setBilling('annuel')">Annuel <div class="savings-chip">-33%</div></button>
+  </div>
+  <br>
+  <div style="display:flex; justify-content:center; align-items:baseline; gap:8px; margin-bottom:8px;">
+    <span class="sub-price" id="sub-price">39€</span>
+    <span class="sub-price-period">/mois</span>
+  </div>
+  <p class="sub-annual-note" id="sub-note" style="visibility:hidden;">Facturé 312€/an · Économisez 156€</p>
+  <div class="sub-features">
+    <div class="sub-feat"><span>✓</span> 47 templates inclus</div>
+    <div class="sub-feat"><span>✓</span> Nouveaux chaque semaine</div>
+    <div class="sub-feat"><span>✓</span> Discord VIP</div>
+    <div class="sub-feat"><span>✓</span> Support prioritaire</div>
+    <div class="sub-feat"><span>✓</span> Webinaires mensuels</div>
+    <div class="sub-feat"><span>✓</span> Mises à jour à vie</div>
+  </div>
+  <button class="btn-sub" onclick="showToast('Redirection vers le paiement...')">Démarrer l'abonnement →</button>
+  <p class="sub-legal">Sans engagement · Résiliable à tout moment · Paiement sécurisé Gumroad</p>
+</div>
+
+<!-- COMMENT ÇA MARCHE -->
+<section>
+  <div style="text-align:center; margin-bottom:0;">
+    <div class="section-tag" style="text-align:center;">Processus</div>
+    <h2 class="section-title" style="text-align:center;">3 étapes. C'est tout.</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-step"><div class="how-num">01</div><div class="how-icon">🔍</div><h3 class="how-title">Choisissez</h3><p class="how-desc">Parcourez le catalogue et sélectionnez les templates adaptés à votre activité.</p></div>
+    <div class="how-step"><div class="how-num">02</div><div class="how-icon">💳</div><h3 class="how-title">Achetez</h3><p class="how-desc">Paiement sécurisé via Gumroad. Accès immédiat après confirmation par email.</p></div>
+    <div class="how-step"><div class="how-num">03</div><div class="how-icon">🚀</div><h3 class="how-title">Déployez</h3><p class="how-desc">Téléchargez, importez dans Make ou ouvrez le PDF. Documentation complète incluse.</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">AutoFlow<span>Store</span></div>
+  <div class="footer-copy">by BZHandiBreizh · Morbihan, Bretagne 🐾</div>
+  <div class="footer-links">
+    <a href="#">CGV</a>
+    <a href="#">Mentions légales</a>
+    <a href="mailto:contact@bzhandibreizh.fr">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const PRODUCTS = [
+    { id:1, type:'pdf', badge:'BESTSELLER', badgeColor:'#00D4FF', title:'RQTH Process Master', sub:'Guide PDF complet + checklists', price:27, old:47, dl:342, desc:"87 pages de procédures RQTH détaillées, lettres types, timelines et checklists pour accompagner vos clients du début à la fin.", features:['87 pages PDF haute résolution','12 lettres types éditables','3 checklists de suivi','Mises à jour 1 an incluses'], color:'#00D4FF', emoji:'📋', link:'#' },
+    { id:2, type:'workflow', badge:'TOP VENTE', badgeColor:'#FF6B35', title:'Pack Onboarding Client', sub:'5 workflows Make JSON prêts', price:49, old:89, dl:218, desc:"Automatisez l'intégration client : emails de bienvenue, collecte de documents, notifications, génération de fiches PDF.", features:['5 workflows Make complets','Documentation installation','Vidéo démo 30 min','Support 30 jours Discord'], color:'#FF6B35', emoji:'⚡', link:'#' },
+    { id:3, type:'slides', badge:'NOUVEAU', badgeColor:'#7C3AED', title:'Pitch Deck IA Bretagne', sub:'Template PowerPoint + Canva', price:19, old:39, dl:127, desc:"45 slides professionnels pour pitcher vos services IA. Design épuré, animations incluses, 100% éditable.", features:['45 slides PPTX + Canva','Palette couleurs Bretagne','Guide de personnalisation','Visuels libres de droits'], color:'#7C3AED', emoji:'🎯', link:'#' },
+    { id:4, type:'workflow', badge:'POPULAIRE', badgeColor:'#10B981', title:'Pipeline Veille IA', sub:'Workflow Make automatique', price:39, old:69, dl:156, desc:"Agrégez les sources IA chaque matin, résumé par Claude, envoi automatique dans Notion + email.", features:['Workflow Make complet','Intégration Claude API','Résumé quotidien automatique','Sources personnalisables'], color:'#10B981', emoji:'🔍', link:'#' },
+    { id:5, type:'pdf', badge:'ESSENTIEL', badgeColor:'#F59E0B', title:'Kit Automatisation Admin France', sub:'PDF + tableau Excel', price:37, old:67, dl:203, desc:"Quel outil pour quel process administratif, ROI calculé, cas d'usage réels issus de 20 ans de terrain.", features:['Guide 60 pages PDF','Tableau ROI Excel','12 cas d\'usage concrets','Mis à jour 2025'], color:'#F59E0B', emoji:'🏛️', link:'#' },
+    { id:6, type:'bundle', badge:'MEILLEURE VALEUR', badgeColor:'#10B981', title:'Pack Fondateur IA', sub:'PDF + Workflows + Slides + VIP', price:97, old:175, dl:89, desc:"Tout ce qu'il faut pour lancer votre activité IA : guides, workflows, templates + accès communauté privée.", features:['Tous les produits inclus','Communauté Discord VIP','Appel stratégie 1:1 30min','Mises à jour à vie'], color:'#10B981', emoji:'🚀', link:'#' },
+  ];
+
+  let activeFilter = 'tous';
+
+  function renderProducts() {
+    const grid = document.getElementById('product-grid');
+    const list = activeFilter === 'tous' ? PRODUCTS : PRODUCTS.filter(p => p.type === activeFilter);
+    grid.innerHTML = list.map(p => `
+      <div class="product-card">
+        <div class="card-accent" style="background:linear-gradient(90deg,${p.color},transparent)"></div>
+        <div class="card-head">
+          <span class="card-badge" style="background:${p.color}20;color:${p.color};border:1px solid ${p.color}30">${p.badge}</span>
+          <span class="card-type">${p.type.toUpperCase()}</span>
+        </div>
+        <span class="card-emoji">${p.emoji}</span>
+        <h3 class="card-title">${p.title}</h3>
+        <p class="card-sub" style="color:${p.color}">${p.sub}</p>
+        <p class="card-desc">${p.desc}</p>
+        <ul class="card-features">${p.features.map(f=>`<li><span style="color:${p.color}">✓</span>${f}</li>`).join('')}</ul>
+        <p class="card-dl">↓ ${p.dl} téléchargements</p>
+        <div class="card-footer">
+          <div class="card-price">
+            <span class="card-price-main">${p.price}€</span>
+            <span class="card-price-old">${p.old}€</span>
+          </div>
+          <a href="${p.link}" class="btn-buy" style="background:linear-gradient(135deg,${p.color},${p.color}cc);color:${p.color==='#F59E0B'||p.color==='#10B981'||p.color==='#00D4FF'?'#000':'#fff'}" onclick="showToast('✓ Redirection vers le paiement...')">Acheter →</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('filters').addEventListener('click', e => {
+    if (!e.target.dataset.filter) return;
+    activeFilter = e.target.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderProducts();
+  });
+
+  function setBilling(mode) {
+    const price = document.getElementById('sub-price');
+    const note = document.getElementById('sub-note');
+    document.getElementById('btn-mensuel').classList.toggle('active', mode==='mensuel');
+    document.getElementById('btn-annuel').classList.toggle('active', mode==='annuel');
+    if (mode === 'annuel') {
+      price.textContent = '26€';
+      note.textContent = 'Facturé 312€/an · Économisez 156€';
+      note.style.visibility = 'visible';
+    } else {
+      price.textContent = '39€';
+      note.style.visibility = 'hidden';
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2800);
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  renderProducts();
+</script>
+</body>
+</html>
