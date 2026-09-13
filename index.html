@@ -125,6 +125,9 @@
     .footer-links { display: flex; gap: 20px; font-size: 12px; color: var(--faint); }
     .footer-links a { color: var(--faint); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--text); }
+    .email-fallback { text-align: center; font-size: 12px; color: var(--faint); padding: 16px 20px; }
+    .email-fallback button { background: none; border: 1px solid var(--faint); color: var(--muted); border-radius: 6px; padding: 3px 10px; font-size: 11px; cursor: pointer; margin-left: 6px; }
+    .email-fallback code { color: var(--text); }
 
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
@@ -226,6 +229,12 @@
   </div>
 </section>
 
+<p class="email-fallback">
+  Un bouton "Acheter" n'ouvre rien chez vous ? Écrivez directement à
+  <code id="fallback-email">pjbreizh56bzh@gmail.com</code>
+  <button type="button" id="copy-fallback-email">Copier l'e-mail</button>
+</p>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">AutoFlow<span>Store</span></div>
@@ -233,7 +242,7 @@
   <div class="footer-links">
     <a href="#">CGV</a>
     <a href="#">Mentions légales</a>
-    <a href="mailto:pjbreizh56bzh@gmail.com">Contact</a>
+    <span>Contact : <code>pjbreizh56bzh@gmail.com</code></span>
   </div>
 </footer>
 
@@ -319,6 +328,16 @@
   });
 
   renderProducts();
+
+  document.getElementById('copy-fallback-email').addEventListener('click', async (e) => {
+    try {
+      await navigator.clipboard.writeText('pjbreizh56bzh@gmail.com');
+      e.target.textContent = 'E-mail copié !';
+      setTimeout(() => (e.target.textContent = "Copier l'e-mail"), 2000);
+    } catch (err) {
+      e.target.textContent = 'Sélectionnez le texte ci-dessus';
+    }
+  });
 </script>
 </body>
 </html>
