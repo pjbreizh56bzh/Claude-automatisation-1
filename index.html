@@ -84,8 +84,6 @@
     .card-price-old { font-size: 13px; color: var(--faint); text-decoration: line-through; margin-left: 6px; }
     .btn-buy { font-family: 'Syne', sans-serif; font-weight: 700; padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all .2s; text-decoration: none; display: inline-block; }
     .btn-buy:hover { transform: scale(1.04); }
-    .btn-buy-disabled { background: var(--faint) !important; color: var(--bg) !important; cursor: not-allowed; opacity: .6; }
-    .btn-buy-disabled:hover { transform: none; }
 
     /* SUBSCRIPTION */
     .sub-section { background: linear-gradient(135deg, rgba(124,58,237,.08) 0%, rgba(0,212,255,.08) 100%); border: 1px solid rgba(124,58,237,.15); border-radius: 32px; padding: 64px 40px; text-align: center; margin: 0 32px 80px; }
@@ -251,6 +249,12 @@
 
   let activeFilter = 'tous';
 
+  function orderByTransferLink(p) {
+    const subject = `Achat — ${p.title} (${p.price}€)`;
+    const body = `Bonjour,\n\nJe souhaite acheter "${p.title}" (${p.price}€) par virement bancaire.\nMerci de m'envoyer vos coordonnées bancaires (IBAN) pour finaliser l'achat.\n\nCordialement.`;
+    return `mailto:contact@bzhandibreizh.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
   function renderProducts() {
     const grid = document.getElementById('product-grid');
     const list = activeFilter === 'tous' ? PRODUCTS : PRODUCTS.filter(p => p.type === activeFilter);
@@ -273,7 +277,7 @@
             <span class="card-price-old">${p.old}€</span>
           </div>
           ${p.link === '#'
-            ? `<span class="btn-buy btn-buy-disabled" aria-disabled="true" title="Lien de paiement pas encore configuré">Bientôt disponible</span>`
+            ? `<a href="${orderByTransferLink(p)}" class="btn-buy" style="background:linear-gradient(135deg,${p.color},${p.color}cc);color:${p.color==='#F59E0B'||p.color==='#10B981'||p.color==='#00D4FF'?'#000':'#fff'}" title="Achat par virement bancaire">Acheter (virement) →</a>`
             : `<a href="${p.link}" class="btn-buy" style="background:linear-gradient(135deg,${p.color},${p.color}cc);color:${p.color==='#F59E0B'||p.color==='#10B981'||p.color==='#00D4FF'?'#000':'#fff'}" onclick="showToast('✓ Redirection vers le paiement...')">Acheter →</a>`}
         </div>
       </div>
